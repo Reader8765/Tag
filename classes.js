@@ -1,4 +1,4 @@
-class Object {
+class Entity {
 	constructor(data) {
 		this.x = data.x;
 		this.y = data.y;
@@ -10,6 +10,6 @@ class Object {
 }
 
 module.exports = {
-	object: Object,
-	trap: Object,
+	object: Entity,
+	trap: Entity,
 };
