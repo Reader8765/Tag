@@ -17,7 +17,7 @@ class Entity extends EventTarget {
 	}
 }
 
-class PLayer extends Entity {
+class Player extends Entity {
 	constructor(data) {
 		super(data);
 		
@@ -25,6 +25,18 @@ class PLayer extends Entity {
 		
 		this.isSprinting = false;
 		this.boost = 1;
+		
+		this.tagged = false;
+		
+		this.addEventListener("collide", event => {
+			const collider = event.collidedWith;
+			if (collider instanceof Player) {
+				if (collider.tagged && !this.tagged) {
+					this.tagged = true;
+					collider.tagged = false;
+				}
+			}
+		});
 	}
 	
 	getSpeed() {
@@ -46,7 +58,7 @@ module.exports = {
 			
 			this.addEventListener("collide", event => {
 				if (event.entity instanceof Player) {
-					event.entity.launch(5, event.entity.direction - 180);
+					event.collidedWith.launch(5, event.entity.direction - 180);
 				}
 			});
 		}
@@ -56,8 +68,8 @@ module.exports = {
 			super(data);
 			
 			this.addEventListener("collide", event => {
-				if (event.entity instanceof Player) {
-					event.entity.isSlow = !!event.status;
+				if (event.colledWith instanceof Player) {
+					event.collidedWith.isSlow = !!event.status;
 				}
 			});
 		}
