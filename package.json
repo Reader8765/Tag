@@ -2,5 +2,14 @@
 	"name": "tag",
 	"author": "haykam821",
 	"license": "MIT",
-	"description": "A persistent tag game."
+	"description": "A persistent tag game.",
+	"dependencies": {
+		"browserify-middleware": "^8.1.1",
+		"express": "^4.16.3",
+		"fs-extra": "^7.0.0",
+		"random-int": "^1.0.0",
+		"shortid": "^2.2.13",
+		"ws": "^6.0.0",
+		"yaeti": "^1.0.2"
+	}
 }

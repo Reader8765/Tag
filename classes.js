@@ -7,13 +7,17 @@ class Entity extends EventTarget {
 		this.x = data.x;
 		this.y = data.y;
 		
-		this.direction = 0;
+		this.id = data.id;
 		
-		this.size = 5;
+		this.direction = 0;
 	}
 	
+	getClientParameters() {
+		return [this.x, this.y, this.direction];
+	}
+
 	getForClient() {
-		return [this.x, this.y];
+		return [this.constructor.name].concat(this.getClientParameters())
 	}
 }
 
@@ -48,13 +52,11 @@ class Player extends Entity {
 }
 
 module.exports = {
-	object: Entity,
-	player: Player,
-	spike: class extends Entity {
+	Entity,
+	Player,
+	Spike: class extends Entity {
 		constructor(data) {
 			super(data);
-			
-			this.size = 4;
 			
 			this.addEventListener("collide", event => {
 				if (event.entity instanceof Player) {
@@ -63,7 +65,7 @@ module.exports = {
 			});
 		}
 	},
-	trap: class extends Entity {
+	Trap: class extends Entity {
 		constructor(data) {
 			super(data);
 			
