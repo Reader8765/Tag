@@ -11,3 +11,4 @@ async function loadJSON(path = "./game.json") {
 	}, game);
 }
 
+module.exports = loadJSON;
